@@ -1,0 +1,16 @@
+extends layout.pug
+include mixins/video
+
+block goHome
+    li
+        a(href="/") Home
+block upload
+    li 
+        a(href="/videos/upload") Upload Video
+block content
+    form(method="GET")
+        input(type="text", placeholder="Search by title", name="keyword")
+        input(type="submit", value="Search Now")
+
+    each video in videos
+        +video(video)

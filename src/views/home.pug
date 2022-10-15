@@ -1,10 +1,8 @@
 extends layout.pug 
 include mixins/video
-block upload 
-    nav
-        ul 
-            li 
-                a(href="/videos/upload") Upload Video
+block upload
+    li 
+        a(href="/videos/upload") Upload Video 
 block content
     each video in videos
         +video(video)

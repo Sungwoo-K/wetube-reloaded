@@ -6,7 +6,25 @@ html(lang="ko")
     body 
         header
             h1=pageTitle
-            block upload
+            nav
+                ul
+                    block goHome
+                    block upload
+                    block search
+                        li 
+                            a(href="/search") Search Video
+                    if loggedIn
+                        li
+                            a(href="/logout") Log Out
+                        li 
+                            a(href="/my-profile") #{loggedInUser.name}의 Profile
+                    else
+                        block join
+                            li 
+                                a(href="/join") Join
+                        block login
+                            li 
+                                a(href="/login") Login
         main 
             block content
     include partials/footer
