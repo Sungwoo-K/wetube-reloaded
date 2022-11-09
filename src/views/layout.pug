@@ -9,11 +9,11 @@ html(lang="ko")
             nav
                 ul
                     block goHome
-                    block upload
                     block search
                         li 
                             a(href="/search") Search Video
                     if loggedIn
+                        block upload
                         li
                             a(href="/users/logout") Log Out
                         li 

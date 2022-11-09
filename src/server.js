@@ -13,22 +13,23 @@ const logger = morgan("dev");
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(logger);
-app.use(express.urlencoded({extended : true}));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
+app.use(
+  session({
     secret: process.env.COOKEY_SECRET,
     resave: false,
-    saveUninitialized: false,  
+    saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: process.env.DB_URL
+      mongoUrl: process.env.DB_URL,
     }),
-  }));
+  })
+);
 
 app.use(localsMiddleware);
 
-app.use("/",rootRouter);
+app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
 export default app;
-
