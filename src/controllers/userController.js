@@ -146,13 +146,40 @@ export const getEdit = (req, res) => {
   return res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
 
-export const postEdit = async (req, res) => {
+export const postEdit = async (req, res, next) => {
   const {
     session: {
       user: { _id },
     },
     body: { name, email, username, location },
   } = req;
+
+  const sessionUser = req.session.user;
+
+  //filter update user
+  const existEmail = await User.exists({ email });
+  const existUsername = await User.exists({ username });
+  const checkExistEmail = sessionUser.email === email;
+  const checkExistUsername = sessionUser.username === username;
+  const emailExistErrMessage = "Already exist e-mail";
+  const usernameExistErrMessage = "Already exist username";
+  if (!checkExistEmail) {
+    if (existEmail) {
+      return res.status(400).render("edit-profile", {
+        pageTitle: "Edit Profile",
+        emailExistErrMessage,
+      });
+    }
+  }
+  if (!checkExistUsername) {
+    if (existUsername) {
+      return res.status(400).render("edit-profile", {
+        pageTitle: "Edit Profile",
+        usernameExistErrMessage,
+      });
+    }
+  }
+
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
