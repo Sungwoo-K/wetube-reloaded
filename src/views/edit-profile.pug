@@ -5,6 +5,10 @@ block goHome
         a(href="/") home
 
 block content
+    if emailExistErrMessage
+        p=emailExistErrMessage
+    if usernameExistErrMessage
+        p=usernameExistErrMessage
     form(method="POST")
         input(placeholder="Name",name="name", type="text", value=loggedInUser.name, required) 
         input(placeholder="Email",name="email", type="email", value=loggedInUser.email, required) 
