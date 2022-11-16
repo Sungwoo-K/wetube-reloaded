@@ -9,7 +9,10 @@ block content
         p=emailExistErrMessage
     if usernameExistErrMessage
         p=usernameExistErrMessage
-    form(method="POST")
+    img(src=`/${loggedInUser.avatar_url}`, height="100", width="100")
+    form(method="POST", enctype="multipart/form-data")
+        label(for="avatar") Avatar
+        input(type="file", id="avatar", name="avatar", accept="image/*")
         input(placeholder="Name",name="name", type="text", value=loggedInUser.name, required) 
         input(placeholder="Email",name="email", type="email", value=loggedInUser.email, required) 
         input(placeholder="Username",name="username", type="text", value=loggedInUser.username, required) 
