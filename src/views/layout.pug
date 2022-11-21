@@ -14,6 +14,8 @@ html(lang="ko")
                             a(href="/search") Search Video
                     if loggedIn
                         block upload
+                        li 
+                            a(href=`/users/${loggedInUser._id}`) My profile
                         li
                             a(href="/users/edit") Edit Profile
                         li

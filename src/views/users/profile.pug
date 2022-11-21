@@ -1,0 +1,12 @@
+extends ../layout
+include ../mixins/video
+
+block goHome
+    li
+        a(href="/") Home
+
+block content
+    each video in user.videos
+        +video(video)
+    else
+        li Sorry nothing found.
