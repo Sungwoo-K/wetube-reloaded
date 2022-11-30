@@ -1,16 +1,14 @@
 extends layout.pug
 include mixins/video
 
-block goHome
-    li
-        a(href="/") Home
-block upload
-    li 
-        a(href="/videos/upload") Upload Video
 block content
-    form(method="GET")
-        input(type="text", placeholder="Search by title", name="keyword")
-        input(type="submit", value="Search Now")
+    form(method="GET").search__form
+        input(placeholder="Search by title",name="keyword", type="text")
+        button
+            i.fas.fa-search
 
-    each video in videos
-        +video(video)
+    div.video-grid
+        each video in videos 
+            +video(video)
+        else
+            span.empty__message No videos found

@@ -1,9 +1,5 @@
 extends layout.pug 
 
-block goHome
-    li
-        a(href="/") Home
-
 block content
     if errorMessage
         span=errorMessage
@@ -15,9 +11,7 @@ block content
         input(placeholder="Confirm Password",name="password2", type="password", required) 
         input(placeholder="Location",name="location", type="text") 
         input(type="submit", value="Join")
-    hr
-    div 
-        a(href="/users/github/start") Continue with Github &rarr;
-    div
-        span Already have an account?
+        include partials/social-login
+    div.auth-switch
+        span Already have an account? 
         a(href="/login") Log in now &rarr;

@@ -2,7 +2,9 @@ import User from "../models/User";
 import Video from "../models/Video";
 
 export const home = async (req, res) => {
-  const videos = await Video.find({});
+  const videos = await Video.find({})
+    .sort({ createdAt: "desc" })
+    .populate("owner");
   return res.render("home", { pageTitle: "Home", videos });
 };
 
@@ -12,7 +14,7 @@ export const watch = async (req, res) => {
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video Not found." });
   }
-  return res.render("watch", { pageTitle: video.title, video });
+  return res.render("videos/watch", { pageTitle: video.title, video });
 };
 
 export const getEdit = async (req, res) => {
@@ -29,7 +31,7 @@ export const getEdit = async (req, res) => {
   if (String(_id) !== String(video.owner)) {
     return res.status(403).redirect("/");
   }
-  res.render("edit", { pageTitle: `Edit: ${video.title}`, video });
+  res.render("videos/edit", { pageTitle: `Edit: ${video.title}`, video });
 };
 
 export const postEdit = async (req, res) => {
@@ -48,7 +50,7 @@ export const postEdit = async (req, res) => {
 };
 
 export const getUpload = (req, res) => {
-  return res.render("upload", { pageTitle: "Upload Video" });
+  return res.render("videos/upload", { pageTitle: "Upload Video" });
 };
 
 export const postUpload = async (req, res) => {
@@ -73,7 +75,7 @@ export const postUpload = async (req, res) => {
     user.save();
     return res.redirect("/");
   } catch (err) {
-    return res.render("upload", {
+    return res.render("videos/upload", {
       pageTitle: "Upload Video",
       errorMessage: err._message,
     });
@@ -106,7 +108,7 @@ export const search = async (req, res) => {
       title: {
         $regex: new RegExp(keyword, "i"),
       },
-    });
+    }).populate("owner");
   }
   return res.render("search", { pageTitle: "Search", videos });
 };

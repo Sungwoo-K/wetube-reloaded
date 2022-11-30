@@ -143,7 +143,7 @@ export const logout = (req, res) => {
 };
 
 export const getEdit = (req, res) => {
-  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+  return res.render("users/edit-profile", { pageTitle: "Edit Profile" });
 };
 
 export const postEdit = async (req, res, next) => {
@@ -166,7 +166,7 @@ export const postEdit = async (req, res, next) => {
   const usernameExistErrMessage = "Already exist username";
   if (!checkExistEmail) {
     if (existEmail) {
-      return res.status(400).render("edit-profile", {
+      return res.status(400).render("users/edit-profile", {
         pageTitle: "Edit Profile",
         emailExistErrMessage,
       });
@@ -174,7 +174,7 @@ export const postEdit = async (req, res, next) => {
   }
   if (!checkExistUsername) {
     if (existUsername) {
-      return res.status(400).render("edit-profile", {
+      return res.status(400).render("users/edit-profile", {
         pageTitle: "Edit Profile",
         usernameExistErrMessage,
       });
@@ -193,7 +193,7 @@ export const postEdit = async (req, res, next) => {
     { new: true }
   );
   req.session.user = updatedUser;
-  return res.redirect("/users/edit");
+  return res.redirect(`/users/${_id}`);
 };
 
 export const getChangePassword = (req, res) => {
@@ -236,7 +236,13 @@ export const postChangePassword = async (req, res) => {
 
 export const see = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).populate("videos");
+  const user = await User.findById(id).populate({
+    path: "videos",
+    populate: {
+      path: "owner",
+      model: "User",
+    },
+  });
   console.log(user);
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User not found." });
