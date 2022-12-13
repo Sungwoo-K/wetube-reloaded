@@ -20,7 +20,7 @@ header
                         if loggedInUser.avatar_url === ""
                             span X
                         else
-                            img.header__avatar(src="/" + loggedInUser.avatar_url)
+                            img.header__avatar(src=loggedInUser.avatar_url crossorigin="anonymous")
                 
             else
                 block join

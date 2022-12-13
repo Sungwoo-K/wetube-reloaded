@@ -106,6 +106,8 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
+
+    console.log(userData);
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -121,9 +123,9 @@ export const finishGithubLogin = async (req, res) => {
     if (!user) {
       user = await User.create({
         email: emailObj.email,
-        username: userData.login,
-        avatar_url: userData.avatar_url,
         socialOnly: true,
+        avatar_url: userData.avatar_url,
+        username: userData.login,
         password: "",
         name: userData.name,
         location: userData.location,
@@ -243,7 +245,6 @@ export const see = async (req, res) => {
       model: "User",
     },
   });
-  console.log(user);
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User not found." });
   }

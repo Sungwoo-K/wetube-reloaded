@@ -63,14 +63,17 @@
   }
 }
 
-@keyframes hidden_icon {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.videoInfo {
+  background-color: rgb(63, 63, 63);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  border-radius: 20px;
+}
+
+.videoTitle {
+  font-size: 25px;
+  font-weight: 550;
 }
