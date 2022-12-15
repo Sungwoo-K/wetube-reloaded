@@ -52,7 +52,9 @@ const handlePlayClick = () => {
 
 const handleEnded = () => {
   playBtnIcon.classList = "fas fa-play";
-  centerPlayBtnIcon.classList = "fas fa-play";
+  centerPlayBtnIcon.classList = "fa-sharp fa-solid fa-rotate-right";
+  clearTimeout(centerKeydownTimeout);
+  centerPlayBox.classList.add("centerShowing");
   const { id } = videoContainer.dataset;
   fetch(`/api/videos/${id}/view`, {
     method: "POST",

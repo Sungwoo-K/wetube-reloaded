@@ -32,8 +32,11 @@ block content
                 a(href=`/users/${video.owner._id}`) #{video.owner.name}
     if String(video.owner._id) === String(loggedInUser._id) 
         a(href=`${video.id}/edit`) Edit Video &rarr;
-        br
-        a(href=`${video.id}/delete`) Delete Video &rarr;    
+        hr
+        a(href=`${video.id}/delete`) Delete Video &rarr;
+        hr
+    div
+        img(src="")
 
 block scripts
     script(src="/static/js/videoPlayer.js") 

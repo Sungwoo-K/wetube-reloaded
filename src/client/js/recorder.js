@@ -95,19 +95,15 @@ const handleStart = () => {
 };
 
 const init = async () => {
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: {
-        width: 1024,
-        height: 576,
-      },
-    });
-    video.srcObject = stream;
-    video.play();
-  } catch {
-    actionBtn.classList.add("hidden");
-  }
+  stream = await navigator.mediaDevices.getUserMedia({
+    audio: true,
+    video: {
+      width: 1024,
+      height: 576,
+    },
+  });
+  video.srcObject = stream;
+  video.play();
 };
 
 init();
