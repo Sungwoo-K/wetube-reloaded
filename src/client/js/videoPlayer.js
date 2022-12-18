@@ -14,6 +14,7 @@ const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 const centerPlayBox = document.getElementById("centerPlayBox");
+const textarea = document.querySelector("textarea");
 
 let volumeValue = 0.5;
 let controlsMovementTimeout = null;
@@ -39,6 +40,7 @@ const keyTimeoutReset = () => {
 };
 
 const handlePlayClick = () => {
+  document.addEventListener("keydown", handlePlayKeydown);
   if (video.paused) {
     video.play();
   } else {
@@ -153,7 +155,9 @@ const handleMouseLeave = () => {
 };
 
 const handlePlayKeydown = (event) => {
-  event.preventDefault();
+  window.onkeydown = function (e) {
+    return e.keyCode !== 32;
+  };
   if (centerKeydownTimeout) {
     clearTimeout(centerKeydownTimeout);
     centerKeydownTimeout = null;
@@ -175,6 +179,13 @@ const handlePlayKeydown = (event) => {
   centerPlayBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
 };
 
+const handlePlayKeydownOff = () => {
+  window.onkeydown = function (e) {
+    return e.keyCode;
+  };
+  document.removeEventListener("keydown", handlePlayKeydown);
+};
+
 playBtn.addEventListener("click", handlePlayClick);
 centerPlayBtn.addEventListener("click", handlePlayClick);
 video.addEventListener("click", handlePlayClick);
@@ -189,3 +200,6 @@ fullScreenBtn.addEventListener("click", handleFullScreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 document.addEventListener("keydown", handlePlayKeydown);
+if (textarea) {
+  textarea.addEventListener("click", handlePlayKeydownOff);
+}
