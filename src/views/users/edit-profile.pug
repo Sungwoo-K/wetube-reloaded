@@ -1,10 +1,6 @@
 extends ../layout.pug
 
 block content
-    if emailExistErrMessage
-        p=emailExistErrMessage
-    if usernameExistErrMessage
-        p=usernameExistErrMessage
     form(method="POST", enctype="multipart/form-data").edit-profile__form
         label(for="avatar") Avatar
         input(type="file", id="avatar", name="avatar", accept="image/*")

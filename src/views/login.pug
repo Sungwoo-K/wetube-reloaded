@@ -1,8 +1,6 @@
 extends layout.pug
 
-block content 
-    if errorMessage
-        span=errorMessage
+block content
     form(method="POST")
         input(placeholder="Email",name="email", type="email", required) 
         input(placeholder="Password",name="password", type="password", required) 

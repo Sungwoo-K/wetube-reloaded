@@ -5,8 +5,6 @@ block content
         div.upload__video
             video#preview
             button#actionBtn.social__btn Start Recording
-    if errorMessage
-        span=errorMessage
     form(method="POST", enctype="multipart/form-data")
         label(for="video") Upload Video 
         input(type="file", name="video", id="video", accept="video/*", required)
