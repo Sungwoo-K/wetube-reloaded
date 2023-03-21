@@ -1,16 +1,1 @@
-# Wetube Reloaded
-
-/ -> Home
-/join -> Join
-/login -> Login
-/search -> Search
-
-/users/:id -> See User
-/users/logout -> Log Out
-/users/edit -> Edit My Profile
-/users/delete -> Delete My Profile
-
-/videos/:id -> See Video
-/videos/:id/edit -> Edit Video
-/videos/:id/delete -> Delete Video
-/videos/upload -> Upload Video
+클론코딩 수업을 들으며 코딩에 익숙해지기 위해 만들었습니다.
