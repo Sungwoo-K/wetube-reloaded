@@ -19,6 +19,8 @@ const videoSchema = new Schema({
 
 videoSchema.static("formatHashtags", function (hashtags) {
   return hashtags
+    .split(" ")
+    .join("")
     .split(",")
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });

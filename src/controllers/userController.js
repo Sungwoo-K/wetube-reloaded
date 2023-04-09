@@ -41,7 +41,11 @@ export const getLogin = (req, res) =>
 
 export const postLogin = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email, socialOnly: false });
+  const user = await User.findOne({ email });
+  if (user.socialOnly) {
+    req.flash("error", "Your account is socialOnly");
+    return res.status(400).redirect("/login");
+  }
   if (!user) {
     req.flash("error", "Email doesn't exist.");
     return res.status(400).redirect("/login");
@@ -129,7 +133,6 @@ export const finishGithubLogin = async (req, res) => {
 
 export const logout = (req, res) => {
   req.session.destroy();
-  req.flash("info", "Bye Bye");
   return res.redirect("/");
 };
 

@@ -12,7 +12,6 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   location: String,
   videos: [{ type: Schema.Types.ObjectId, ref: "Video" }],
-  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 userSchema.pre("save", async function () {

@@ -36,17 +36,18 @@ block content
         a(href=`${video.id}/delete`) Delete Video &rarr;
         hr
     if loggedIn
-        div.video__comments
+        div.video__add-comments
             form.video__comment-form#commentForm
-                textarea#textarea(cols="30", rows="10", placeholder="Write a nice comment...")
+                textarea#textarea(placeholder="Write a nice comment...")
                 button Add Comment
     div.video__comments
         ul
             each comment in video.comments.reverse()
-                li.video__comment
-                    i.fas.fa-comment
-                    |  #{comment.text}
-
+                li(data-id=comment._id).video__comment
+                    span #{comment.text}
+                    if String(comment.owner) === String(loggedInUser._id)
+                        form.commentDeleteBtn
+                            button.fa-solid.fa-xmark
 block scripts
     script(src="/static/js/videoPlayer.js") 
     if loggedIn

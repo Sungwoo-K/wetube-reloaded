@@ -1,6 +1,7 @@
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 const actionBtn = document.getElementById("actionBtn");
 const video = document.getElementById("preview");
+const videoBox = document.querySelector(".upload__video");
 
 let stream;
 let recorder;
@@ -95,15 +96,19 @@ const handleStart = () => {
 };
 
 const init = async () => {
-  stream = await navigator.mediaDevices.getUserMedia({
-    audio: true,
-    video: {
-      width: 1024,
-      height: 576,
-    },
-  });
-  video.srcObject = stream;
-  video.play();
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: {
+        width: 1024,
+        height: 576,
+      },
+    });
+    video.srcObject = stream;
+    video.play();
+  } catch (err) {
+    videoBox.remove();
+  }
 };
 
 init();
